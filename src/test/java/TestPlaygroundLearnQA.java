@@ -23,6 +23,7 @@ public class TestPlaygroundLearnQA {
 
      */
    /* @Test
+   @DisplayName("Передача параметров в массиве/коллекции")
     public void testRestAssured() {
         Map<String, String> params = new HashMap<>();
         params.put("name", "Liz");
@@ -41,7 +42,9 @@ public class TestPlaygroundLearnQA {
         }
     }*/
 
-    @Test
+   /*
+   @Test
+
     @DisplayName("Отправка post-запроса с параметрами в теле запроса")
     public void testRestAssured() {
         Map<String, Object> body = new HashMap<>();
@@ -51,9 +54,26 @@ public class TestPlaygroundLearnQA {
                 .given()
                 /*.body("param1=value1&param2=value2") - так можно передать параметры строкой. А можно json - см. дальше*/
                 /*.body("{\"param1\":\"value1\",\"param2\":\"value2\"}") - а можно json положить в коллекцию, см. дальше*/
+    /*
                 .body(body)
                 .post("https://playground.learnqa.ru/api/check_type")
                 .andReturn();
         response.print();
+    }*/
+
+
+    @Test
+    @DisplayName("Получение статус-кода")
+    public void testRestAssured() {
+
+        Response response = RestAssured
+                .given()
+                .redirects()
+                .follow(false)
+                .get("https://playground.learnqa.ru/api/get_303")
+                .andReturn();
+        int statusCode = response.getStatusCode();
+        System.out.println(statusCode);
+
     }
 }
