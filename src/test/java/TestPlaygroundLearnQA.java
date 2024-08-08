@@ -70,6 +70,7 @@ public class TestPlaygroundLearnQA {
                 .given()
                 .redirects()
                 .follow(false)
+                .when()
                 .get("https://playground.learnqa.ru/api/get_303")
                 .andReturn();
         int statusCode = response.getStatusCode();
