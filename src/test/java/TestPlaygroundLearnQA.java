@@ -1,3 +1,4 @@
+import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -53,7 +54,7 @@ public class TestPlaygroundLearnQA {
         Response response = RestAssured
                 .given()
                 /*.body("param1=value1&param2=value2") - так можно передать параметры строкой. А можно json - см. дальше*/
-                /*.body("{\"param1\":\"value1\",\"param2\":\"value2\"}") - а можно json положить в коллекцию, см. дальше*/
+    /*.body("{\"param1\":\"value1\",\"param2\":\"value2\"}") - а можно json положить в коллекцию, см. дальше*/
     /*
                 .body(body)
                 .post("https://playground.learnqa.ru/api/check_type")
@@ -62,7 +63,7 @@ public class TestPlaygroundLearnQA {
     }*/
 
 
-    @Test
+    /*@Test
     @DisplayName("Получение статус-кода")
     public void testRestAssured() {
 
@@ -75,6 +76,52 @@ public class TestPlaygroundLearnQA {
                 .andReturn();
         int statusCode = response.getStatusCode();
         System.out.println(statusCode);
+
+    }*/
+
+   /* @Test
+    @DisplayName("Работа с заголовками")
+    public void testRestAssured() {
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("MyHeader1", "myValue1");
+        headers.put("MyHeader2", "myValue2");
+
+        Response response = RestAssured
+                .given()
+                .when()
+                .get("https://playground.learnqa.ru/api/get_303")
+                .andReturn();
+
+        response.prettyPrint();
+
+        String locationHeader = response.getHeader("Location");
+        System.out.println(locationHeader);
+    }
+*/
+    @Test
+    @DisplayName("Куки. Авторизация")
+    public void testRestAssured() {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("login", "secret_login");
+        data.put("password", "secret_pass");
+
+        Response response = RestAssured
+                .given()
+                .body(data)
+                .when()
+                .post("https://playground.learnqa.ru/api/get_auth_cookie")
+                .andReturn();
+
+        System.out.println("\nPretty text:");
+        response.prettyPrint();
+
+        System.out.println("\nHeaders:");
+        Headers responseHeaders = response.getHeaders();
+        System.out.println(responseHeaders);
+
+        System.out.println("\nCookies:");
+        Map<String, String> responseCookies = response.getCookies();
+        System.out.println(responseCookies);
 
     }
 }
