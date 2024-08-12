@@ -98,7 +98,7 @@ public class TestPlaygroundLearnQA {
         System.out.println(locationHeader);
     }
 */
-    @Test
+    /*@Test
     @DisplayName("Куки. Авторизация")
     public void testRestAssured() {
         HashMap<String, String> data = new HashMap<>();
@@ -122,6 +122,37 @@ public class TestPlaygroundLearnQA {
         System.out.println("\nCookies:");
         Map<String, String> responseCookies = response.getCookies();
         System.out.println(responseCookies);
+        */
 
+    @Test
+    @DisplayName("Авторизация. Передача кук")
+    public void testRestAssured() {
+        HashMap<String, String> data = new HashMap<>();
+        data.put("login", "secret_login");
+        data.put("password", "secret_pass");
+
+        Response responseForGet = RestAssured
+                .given()
+                .body(data)
+                .when()
+                .post("https://playground.learnqa.ru/api/get_auth_cookie")
+                .andReturn();
+
+        String responseForCookie = responseForGet.getCookie("auth_cookie");
+
+        Map<String, String> cookie = new HashMap<>();
+        if(responseForCookie != null) {
+            cookie.put("auth_cookie", responseForCookie);
+        }
+
+        Response responseForCheck = RestAssured
+                .given()
+                .body(data)
+                .cookies(cookie)
+                .when()
+                .post("https://playground.learnqa.ru/api/check_auth_cookie")
+                .andReturn();
+
+        responseForCheck.print();
     }
 }
