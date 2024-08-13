@@ -153,6 +153,6 @@ public class TestPlaygroundLearnQA {
                 .post("https://playground.learnqa.ru/api/check_auth_cookie")
                 .andReturn();
 
-        responseForCheck.print();
+
     }
 }
