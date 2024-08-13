@@ -8,7 +8,6 @@ public class GetJsonTest {
     @DisplayName("Парсинг JSON")
     public void getJson() {
         JsonPath json = RestAssured
-                .given()
                 .when()
                 .get("https://playground.learnqa.ru/api/get_json_homework")
                 .jsonPath();
