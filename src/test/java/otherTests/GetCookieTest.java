@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GetCookieTest {
     @Test
@@ -17,8 +18,8 @@ public class GetCookieTest {
                 .get(" https://playground.learnqa.ru/api/homework_cookie")
                 .andReturn();
 
-        String cookie = responseWithCookie.getCookie("HomeWork");
-        String expectedCookie = "hw_value";
-        assertEquals(expectedCookie, cookie, "The cookie is unexpected: " + cookie);
+        Map<String, String> cookies = responseWithCookie.getCookies();
+        String expectedCookieValue = "hw_value";
+        assertTrue(cookies.containsValue(expectedCookieValue), "Response doesn't have cookie " + expectedCookieValue);
     }
 }
