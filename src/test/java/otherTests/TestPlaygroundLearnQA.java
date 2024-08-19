@@ -1,3 +1,5 @@
+package otherTests;
+
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.DisplayName;
