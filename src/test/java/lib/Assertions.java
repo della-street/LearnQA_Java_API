@@ -28,4 +28,8 @@ public class Assertions {
                 "Status Code text isn't as expected"
         );
     }
+
+    public static void assertJsonHasKey(Response Response, String expectedFieldName) {
+        Response.then().assertThat().body("$", hasKey(expectedFieldName));
+    }
 }
