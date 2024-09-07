@@ -47,4 +47,13 @@ return given()
                 .post(url)
                 .andReturn();
     }
+
+    @Step("Make a POST-request to create user")
+    public Response makePostRequestToCreateUser(String url, Map<String, String> registerData){
+        return given()
+                .filter(new AllureRestAssured())
+                .body(registerData)
+                .post(url)
+                .andReturn();
+    }
 }
