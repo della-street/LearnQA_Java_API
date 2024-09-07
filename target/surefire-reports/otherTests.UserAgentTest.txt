@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: otherTests.UserAgentTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 2.384 s <<< FAILURE! - in otherTests.UserAgentTest
+getUserAgentParameters{String}[2]  Time elapsed: 0.406 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Wrong browser ==> expected: <Chrome> but was: <No>
+	at otherTests.UserAgentTest.getUserAgentParameters(UserAgentTest.java:53)
+
+getUserAgentParameters{String}[3]  Time elapsed: 0.441 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Wrong platform ==> expected: <Googlebot> but was: <Unknown>
+	at otherTests.UserAgentTest.getUserAgentParameters(UserAgentTest.java:52)
+
+getUserAgentParameters{String}[5]  Time elapsed: 0.444 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Wrong device ==> expected: <iPhone> but was: <Unknown>
+	at otherTests.UserAgentTest.getUserAgentParameters(UserAgentTest.java:54)
+

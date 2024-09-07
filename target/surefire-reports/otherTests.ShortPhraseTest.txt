@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: otherTests.ShortPhraseTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.076 s <<< FAILURE! - in otherTests.ShortPhraseTest
+countSymbols{String}  Time elapsed: 0.076 s  <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [java.lang.String arg0] in method [public void otherTests.ShortPhraseTest.countSymbols(java.lang.String)].
+
