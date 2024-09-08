@@ -31,7 +31,7 @@ public class Assertions {
         );
     }
 
-    /*Проверка на соответствие ожидаемого и фактического ответа сервера - по части ответа сервера*/
+    /*Проверка на то, что часть ответа сервера совпадает с ожидаемым ответом*/
     public static void assertResponseTextContains(Response Response, String expectedAnswer) {
         assertTrue(
                 Response.asString().contains(expectedAnswer),

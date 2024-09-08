@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -117,23 +119,23 @@ public class UserRegisterTest extends BaseTestCase {
         Assertions.assertResponseTextEquals(responseCreateUserWithLongName, expectedResult);
     }
 
-    public static Map<String, String>[] getDataWithEmptyParameters() {
-        Map<String, String>[] hashMaps = new HashMap[5];
+    public static List<Map<String, String>> getDataWithEmptyParameters() {
+        List<Map <String, String>> hashMaps = new ArrayList<>();
 
         Map<String, String> dataWithoutEmail = DataGenerator.getRegistrationDataWithoutEmail();
-        hashMaps[0] = dataWithoutEmail;
+        hashMaps.add(dataWithoutEmail);
 
         Map<String, String> dataWithoutPassword = DataGenerator.getRegistrationDataWithoutPassword();
-        hashMaps[1] = dataWithoutPassword;
+        hashMaps.add(dataWithoutPassword);
 
         Map<String, String> dataWithoutUserName = DataGenerator.getRegistrationDataWithoutUserName();
-        hashMaps[2] = dataWithoutUserName;
+        hashMaps.add(dataWithoutUserName);
 
         Map<String, String> dataWithoutFirstName = DataGenerator.getRegistrationDataWithoutFirstName();
-        hashMaps[3] = dataWithoutFirstName;
+        hashMaps.add(dataWithoutFirstName);
 
         Map<String, String> dataWithoutLastName = DataGenerator.getRegistrationDataWithoutLastName();
-        hashMaps[4] = dataWithoutLastName;
+        hashMaps.add(dataWithoutLastName);
 
         return hashMaps;
     }
