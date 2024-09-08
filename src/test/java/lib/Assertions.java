@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Assertions {
     public static void assertJsonByName(Response Response, String name, int expectedValue) {
@@ -27,6 +28,14 @@ public class Assertions {
                 expectedAnswer,
                 Response.asString(),
                 "Response text isn't as expected"
+        );
+    }
+
+    /*Проверка на соответствие ожидаемого и фактического ответа сервера - по части ответа сервера*/
+    public static void assertResponseTextContains(Response Response, String expectedAnswer) {
+        assertTrue(
+                Response.asString().contains(expectedAnswer),
+                "Response text doesn't contain expected answer"
         );
     }
 

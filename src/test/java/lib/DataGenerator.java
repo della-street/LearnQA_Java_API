@@ -21,6 +21,61 @@ public class DataGenerator {
         return data;
     }
 
+    public static Map<String, String> getRegistrationDataWithoutEmail(){
+        Map<String, String> data = new HashMap<>();
+        data.put("email", null);
+        data.put("password", "123");
+        data.put("username", "learnqa");
+        data.put("firstName", "learnqa");
+        data.put("lastName", "learnqa");
+
+        return data;
+    }
+
+    public static Map<String, String> getRegistrationDataWithoutPassword(){
+        Map<String, String> data = new HashMap<>();
+        data.put("email", DataGenerator.getRandomEmail());
+        data.put("password", null);
+        data.put("username", "learnqa");
+        data.put("firstName", "learnqa");
+        data.put("lastName", "learnqa");
+
+        return data;
+    }
+
+    public static Map<String, String> getRegistrationDataWithoutUserName(){
+        Map<String, String> data = new HashMap<>();
+        data.put("email", DataGenerator.getRandomEmail());
+        data.put("password", "123");
+        data.put("username", null);
+        data.put("firstName", "learnqa");
+        data.put("lastName", "learnqa");
+
+        return data;
+    }
+
+    public static Map<String, String> getRegistrationDataWithoutFirstName(){
+        Map<String, String> data = new HashMap<>();
+        data.put("email", DataGenerator.getRandomEmail());
+        data.put("password", "123");
+        data.put("username", "learnqa");
+        data.put("firstName", null);
+        data.put("lastName", "learnqa");
+
+        return data;
+    }
+
+    public static Map<String, String> getRegistrationDataWithoutLastName(){
+        Map<String, String> data = new HashMap<>();
+        data.put("email", DataGenerator.getRandomEmail());
+        data.put("password", "123");
+        data.put("username", "learnqa");
+        data.put("firstName", "learnqa");
+        data.put("lastName", null);
+
+        return data;
+    }
+
     public static Map<String, String> getRegistrationData(Map<String, String> nonDefautlValues){
         Map<String, String> defaultValues = DataGenerator.getRegistrationData();
 

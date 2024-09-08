@@ -9,6 +9,8 @@ import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -89,6 +91,7 @@ public class UserRegisterTest extends BaseTestCase {
         Assertions.assertResponseTextEquals(responseCreateUserWithShortName, expectedResult);
     }
 
+
     @Test
     @Description("This test creates user with long first name")
     @DisplayName("Creating user with long first name")
@@ -112,5 +115,40 @@ public class UserRegisterTest extends BaseTestCase {
         String expectedResult = "The value of 'firstName' field is too long";
 
         Assertions.assertResponseTextEquals(responseCreateUserWithLongName, expectedResult);
+    }
+
+    public static Map<String, String>[] getDataWithEmptyParameters() {
+        Map<String, String>[] hashMaps = new HashMap[5];
+
+        Map<String, String> dataWithoutEmail = DataGenerator.getRegistrationDataWithoutEmail();
+        hashMaps[0] = dataWithoutEmail;
+
+        Map<String, String> dataWithoutPassword = DataGenerator.getRegistrationDataWithoutPassword();
+        hashMaps[1] = dataWithoutPassword;
+
+        Map<String, String> dataWithoutUserName = DataGenerator.getRegistrationDataWithoutUserName();
+        hashMaps[2] = dataWithoutUserName;
+
+        Map<String, String> dataWithoutFirstName = DataGenerator.getRegistrationDataWithoutFirstName();
+        hashMaps[3] = dataWithoutFirstName;
+
+        Map<String, String> dataWithoutLastName = DataGenerator.getRegistrationDataWithoutLastName();
+        hashMaps[4] = dataWithoutLastName;
+
+        return hashMaps;
+    }
+
+    @ParameterizedTest
+    @Description("User creating with empty parameters in register data")
+    @DisplayName("User creating with empty register data")
+    @MethodSource("getDataWithEmptyParameters")
+    public void testCreateUserWithEmptyRegisterData(Map<String, String> registerData) {
+        Response responseCreateUserWithEmptyRegisterParameters = apiCoreRequests.
+                makePostRequestToCreateUser("https://playground.learnqa.ru/api/user/", registerData);
+        System.out.println(responseCreateUserWithEmptyRegisterParameters.asString());
+
+        String expectedAnswer = "The following required params are missed";
+        Assertions.assertResponseTextContains(responseCreateUserWithEmptyRegisterParameters, expectedAnswer);
+
     }
 }
