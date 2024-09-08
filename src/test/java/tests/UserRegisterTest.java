@@ -120,24 +120,24 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     public static List<Map<String, String>> getDataWithEmptyParameters() {
-        List<Map <String, String>> hashMaps = new ArrayList<>();
+        List<Map <String, String>> dataMaps = new ArrayList<>();
 
         Map<String, String> dataWithoutEmail = DataGenerator.getRegistrationDataWithoutEmail();
-        hashMaps.add(dataWithoutEmail);
+        dataMaps.add(dataWithoutEmail);
 
         Map<String, String> dataWithoutPassword = DataGenerator.getRegistrationDataWithoutPassword();
-        hashMaps.add(dataWithoutPassword);
+        dataMaps.add(dataWithoutPassword);
 
         Map<String, String> dataWithoutUserName = DataGenerator.getRegistrationDataWithoutUserName();
-        hashMaps.add(dataWithoutUserName);
+        dataMaps.add(dataWithoutUserName);
 
         Map<String, String> dataWithoutFirstName = DataGenerator.getRegistrationDataWithoutFirstName();
-        hashMaps.add(dataWithoutFirstName);
+        dataMaps.add(dataWithoutFirstName);
 
         Map<String, String> dataWithoutLastName = DataGenerator.getRegistrationDataWithoutLastName();
-        hashMaps.add(dataWithoutLastName);
+        dataMaps.add(dataWithoutLastName);
 
-        return hashMaps;
+        return dataMaps;
     }
 
     @ParameterizedTest
