@@ -21,7 +21,6 @@ public class DataGenerator {
         return data;
     }
 
-
     public static Map<String, String> getRegistrationData(Map<String, String> nonDefautlValues){
         Map<String, String> defaultValues = DataGenerator.getRegistrationData();
 

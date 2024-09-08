@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserRegisterTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
+
     @Test
     public void createUserWithExistingEmail() {
         String email = "vinkotov@example.com";
@@ -68,5 +69,48 @@ public class UserRegisterTest extends BaseTestCase {
 
         String expectedResult = "Invalid email format";
         Assertions.assertResponseTextEquals(responseCreateUserWithWrongEmail, expectedResult);
-   }
+    }
+
+    @Test
+    @Description("This test creates user with short first name")
+    @DisplayName("Creating user with short first name")
+    public void createUserWithShortName() {
+        String firstName = "a";
+
+        Map<String, String> registerData = new HashMap<>();
+        registerData.put("firstName", firstName);
+        registerData = DataGenerator.getRegistrationData(registerData);
+
+        Response responseCreateUserWithShortName = apiCoreRequests.
+                makePostRequestToCreateUser("https://playground.learnqa.ru/api/user/", registerData);
+
+        String expectedResult = "The value of 'firstName' field is too short";
+
+        Assertions.assertResponseTextEquals(responseCreateUserWithShortName, expectedResult);
+    }
+
+    @Test
+    @Description("This test creates user with long first name")
+    @DisplayName("Creating user with long first name")
+    public void createUserWithLongName() {
+        String firstName = "мммммммммммммммммммммммммммммм" +
+                "мммммммммммммммммммммммммммммммммммммммм" +
+                "ммммммммsddffffffffffffffffffff" +
+                "fffffffffffffffffffffffffffffffffff" +
+                "ffffffffffffffffffffffffffffffffffff" +
+                "fffffffffffffffffffffffffffffffffff" +
+                "ffffffffffffffffffffffffffffffffffff" +
+                "fffffffffffffffffffffffff";
+
+        Map<String, String> registerData = new HashMap<>();
+        registerData.put("firstName", firstName);
+        registerData = DataGenerator.getRegistrationData(registerData);
+
+        Response responseCreateUserWithLongName = apiCoreRequests.
+                makePostRequestToCreateUser("https://playground.learnqa.ru/api/user/", registerData);
+
+        String expectedResult = "The value of 'firstName' field is too long";
+
+        Assertions.assertResponseTextEquals(responseCreateUserWithLongName, expectedResult);
+    }
 }
