@@ -39,7 +39,7 @@ return given()
                 .andReturn();
     }
 
-    @Step("Make a POST-request")
+    @Step("Make a POST-request ")
     public Response makePostRequest(String url, Map<String, String> authData){
         return given()
                 .filter(new AllureRestAssured())
