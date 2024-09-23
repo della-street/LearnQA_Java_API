@@ -90,4 +90,12 @@ public class DataGenerator {
         }
         return userData;
     }
+
+    public static Map<String, String> getLoginData(){
+        Map<String, String> loginData = new HashMap<>();
+        loginData.put("email", "vinkotov@example.com");
+        loginData.put("password", "1234");
+
+        return loginData;
+    }
 }
