@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.Cookie;
 import io.restassured.http.Header;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 import java.util.Map;
@@ -54,6 +55,26 @@ return given()
                 .filter(new AllureRestAssured())
                 .body(registerData)
                 .post(url)
+                .andReturn();
+    }
+
+    @Step("Make a POST-request to create user with Json in answer")
+    public JsonPath makePostRequestToCreateUserWithJsonAnswer(String url, Map<String, String> registerData){
+        return given()
+                .filter(new AllureRestAssured())
+                .body(registerData)
+                .post(url)
+                .jsonPath();
+    }
+
+    @Step("Make a put-request")
+    public Response makePutRequest(String url, String token, String cookie, Map<String, String> editData){
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header("x-csrf-token", token))
+                .cookie("auth_sid", cookie)
+                .body(editData)
+                .put(url)
                 .andReturn();
     }
 }
