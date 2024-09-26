@@ -1,6 +1,7 @@
 package tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
@@ -78,6 +79,7 @@ public class UserRegisterTest extends BaseTestCase {
     @Test
     @Description("This test creates user with short first name")
     @DisplayName("Creating user with short first name")
+    @Story("Негативные тесты")
     public void createUserWithShortName() {
         String firstName = "a";
 
@@ -97,6 +99,7 @@ public class UserRegisterTest extends BaseTestCase {
     @Test
     @Description("This test creates user with long first name")
     @DisplayName("Creating user with long first name")
+    @Story("Негативные тесты")
     public void createUserWithLongName() {
         String firstName = "мммммммммммммммммммммммммммммм" +
                 "мммммммммммммммммммммммммммммммммммммммм" +
@@ -143,6 +146,7 @@ public class UserRegisterTest extends BaseTestCase {
     @ParameterizedTest
     @Description("User creating with empty parameters in register data")
     @DisplayName("User creating with empty register data")
+    @Story("Негативные тесты")
     @MethodSource("getDataWithEmptyParameters")
     public void testCreateUserWithEmptyRegisterData(Map<String, String> registerData) {
         Response responseCreateUserWithEmptyRegisterParameters = apiCoreRequests.
@@ -151,6 +155,5 @@ public class UserRegisterTest extends BaseTestCase {
 
         String expectedAnswer = "The following required params are missed";
         Assertions.assertResponseTextContains(responseCreateUserWithEmptyRegisterParameters, expectedAnswer);
-
     }
 }

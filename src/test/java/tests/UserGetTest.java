@@ -1,6 +1,8 @@
 package tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
@@ -19,6 +21,8 @@ public class UserGetTest extends BaseTestCase {
 
     @Test
     @DisplayName("Получаем данные пользователя, не будучи залогиненными в систему. Проверяем, что виден только один параметр - юзернейм. Остальные - не видно")
+    @Feature("Действия с пользователем")
+    @Story("Позитивные тесты")
     public void testGetUserDataNotAuth() {
         Response responseUserData = RestAssured
                 .get("https://playground.learnqa.ru/api_dev/user/2")
@@ -32,6 +36,8 @@ public class UserGetTest extends BaseTestCase {
 
     @Test
     @DisplayName("Получение данных профиля юзера, будучи залогиненным под этим же юзером")
+    @Feature("Действия с пользователем")
+    @Story("Позитивные тесты")
     public void testGetUserDetailsAuthAsSameUser() {
         Map<String, String> authData = new HashMap<>();
         authData.put("email", "vinkotov@example.com");
@@ -59,6 +65,8 @@ public class UserGetTest extends BaseTestCase {
     @Test
     @Description("Получение данных одного пользователя из-под логина другим пользователем")
     @DisplayName("Получение данных другого пользователя")
+    @Feature("Действия с пользователем")
+    @Story("Негативные тесты")
     public void testGetAnotherUserDetails() {
 
         //Логин под пользователем с ID=2
@@ -82,5 +90,4 @@ public class UserGetTest extends BaseTestCase {
         Assertions.assertJsonHasNotField(getAnotherUserData, "firstName");
         Assertions.assertJsonHasNotField(getAnotherUserData, "lastName");
     }
-
 }

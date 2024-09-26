@@ -1,6 +1,8 @@
 package tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -18,6 +20,8 @@ public class UserEditTest extends BaseTestCase {
     ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
 
     @Test
+    @Feature("Действия с пользователем")
+    @Story("Позитивные тесты")
     public void testEditJustCreatedTest() {
         //Generate user
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -67,6 +71,8 @@ public class UserEditTest extends BaseTestCase {
 
     @Test
     @Description("Изменение данных пользователя без авторизации")
+    @Feature("Действия с пользователем")
+    @Story("Негативные тесты")
     public void testEditUserDataWithoutAuthorization() {
         String newName = "ChangedName";
         Map<String, String> editData = new HashMap<>();
@@ -83,6 +89,8 @@ public class UserEditTest extends BaseTestCase {
 
     @Test
     @Description("Изменение данных пользователя с авторизацией под другим пользователем")
+    @Feature("Действия с пользователем")
+    @Story("Негативные тесты")
     public void testEditAnotherUserData() {
         //Создание пользователя
         Response createUser = apiCoreRequests.makePostRequestToCreateUser(
@@ -110,6 +118,8 @@ public class UserEditTest extends BaseTestCase {
 
     @Test
     @Description("Изменение email пользователя, будучи авторизованными тем же пользователем, на новый email без символа @")
+    @Feature("Действия с пользователем")
+    @Story("Негативные тесты")
     public void testEditUserByAddingInvalidEmail(){
         //Создание пользователя
         Map<String, String> userData = DataGenerator.getRegistrationData();
@@ -148,6 +158,8 @@ public class UserEditTest extends BaseTestCase {
 
     @Test
     @Description("Изменение имени пользователя, будучи авторизованными тем же пользователем, на новый на имя длиной в 1 символ")
+    @Feature("Действия с пользователем")
+    @Story("Негативные тесты")
     public void testEditUserByAddingShortFirstName(){
         //Создание пользователя
         Map<String, String> userData = DataGenerator.getRegistrationData();

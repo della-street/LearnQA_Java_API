@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
@@ -51,6 +52,8 @@ public class UserAuthTest extends BaseTestCase {
     @Test
     @Description("This test successfully authorizes user by email and password")
     @DisplayName("Test positive auth user")
+    @Feature("Действия с пользователем")
+    @Story("Позитивные тесты")
     //"Позитивный тест на авторизацию. Сначала авторизуемся, " +
     //"затем проверяем, что id пользователя, полученный при авторизации, совпадает с id пользователя, приходящим от сервера при отправке нужных кук")
     public void testAuthUser() {
@@ -63,8 +66,10 @@ public class UserAuthTest extends BaseTestCase {
 
     @Description("This test checks authorization status without sending auth cookie or token")
     @DisplayName("Test negative auth user")
+    @Feature("Действия с пользователем")
     @ParameterizedTest
     @ValueSource(strings = {"cookie", "headers"})
+    @Story("Негативные тесты")
     //"Негативная авторизация. Не передается либо хэдер, либо куки"
     public void testNegativeAuthUser(String condition) {
 
