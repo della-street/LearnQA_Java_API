@@ -21,7 +21,7 @@ public class UserGetTest extends BaseTestCase {
     @DisplayName("Получаем данные пользователя, не будучи залогиненными в систему. Проверяем, что виден только один параметр - юзернейм. Остальные - не видно")
     public void testGetUserDataNotAuth() {
         Response responseUserData = RestAssured
-                .get("https://playground.learnqa.ru/api/user/2")
+                .get("https://playground.learnqa.ru/api_dev/user/2")
                 .andReturn();
 
         Assertions.assertJsonHasField(responseUserData, "username");
@@ -39,7 +39,7 @@ public class UserGetTest extends BaseTestCase {
         Response responseGetAuth = RestAssured
                 .given()
                 .body(authData)
-                .post("https://playground.learnqa.ru/api/user/login")
+                .post("https://playground.learnqa.ru/api_dev/user/login")
                 .andReturn();
 
         String header = this.getHeader(responseGetAuth, "x-csrf-token");
@@ -49,7 +49,7 @@ public class UserGetTest extends BaseTestCase {
                 .given()
                 .header("x-csrf-token", header)
                 .cookie("auth_sid", cookie)
-                .get("https://playground.learnqa.ru/api/user/2/")
+                .get("https://playground.learnqa.ru/api_dev/user/2/")
                 .andReturn();
 
         String[] expectedFields = {"username", "firstName", "lastName", "email"};
@@ -63,7 +63,7 @@ public class UserGetTest extends BaseTestCase {
 
         //Логин под пользователем с ID=2
         Response responseGetAuthData = apiCoreRequests.makePostRequest(
-                        "https://playground.learnqa.ru/api/user/login",
+                        "https://playground.learnqa.ru/api_dev/user/login",
                         DataGenerator.getLoginData())
                 .andReturn();
 
@@ -72,7 +72,7 @@ public class UserGetTest extends BaseTestCase {
 
         //Получение данных пользователя с ID=3
         Response getAnotherUserData = apiCoreRequests
-                .makeGetRequest("https://playground.learnqa.ru/api/user/3", token, cookie)
+                .makeGetRequest("https://playground.learnqa.ru/api_dev/user/3", token, cookie)
                 .andReturn();
 
         Assertions.assertJsonHasField(getAnotherUserData, "username");

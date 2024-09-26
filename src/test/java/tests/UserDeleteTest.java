@@ -23,7 +23,7 @@ public class UserDeleteTest extends BaseTestCase {
     public void testDeleteExistingUser() {
         //Авторизация под пользователем с ID = 2
         Response login = apiCoreRequests.makePostRequest(
-                "https://playground.learnqa.ru/api/user/login",
+                "https://playground.learnqa.ru/api_dev/user/login",
                 DataGenerator.getLoginData()
         );
 
@@ -33,7 +33,7 @@ public class UserDeleteTest extends BaseTestCase {
         //Удаление пользователя с ID = 2
         String userId = "2";
         Response deleteUser = apiCoreRequests.makeDeleteRequest(
-                " https://playground.learnqa.ru/api/user/" + userId,
+                " https://playground.learnqa.ru/api_dev/user/" + userId,
                 token,
                 cookie);
 
@@ -47,7 +47,7 @@ public class UserDeleteTest extends BaseTestCase {
         //Создание пользователя
         Map<String, String> userData = DataGenerator.getRegistrationData();
         JsonPath createUser = apiCoreRequests.makePostRequestToCreateUserWithJsonAnswer(
-                "https://playground.learnqa.ru/api/user/",
+                "https://playground.learnqa.ru/api_dev/user/",
                 userData
         );
 
@@ -59,20 +59,20 @@ public class UserDeleteTest extends BaseTestCase {
         authData.put("password", userData.get("password"));
 
         Response responseGetAuth = apiCoreRequests.makePostRequest(
-                "https://playground.learnqa.ru/api/user/login",
+                "https://playground.learnqa.ru/api_dev/user/login",
                 authData);
         String cookie = responseGetAuth.getCookie("auth_sid");
         String token = responseGetAuth.getHeader("x-csrf-token");
 
         //Удаление пользователя
         Response deleteUser = apiCoreRequests.makeDeleteRequest(
-                "https://playground.learnqa.ru/api/user/" + userId,
+                "https://playground.learnqa.ru/api_dev/user/" + userId,
                 token,
                 cookie);
 
         //Получение данных пользователя
         Response getUserData = apiCoreRequests.makeGetRequest(
-                "https://playground.learnqa.ru/api/user/" + userId,
+                "https://playground.learnqa.ru/api_dev/user/" + userId,
                 token,
                 cookie
         );
@@ -87,7 +87,7 @@ public class UserDeleteTest extends BaseTestCase {
         //Создание пользователя
         Map<String, String> userData = DataGenerator.getRegistrationData();
         JsonPath createUser = apiCoreRequests.makePostRequestToCreateUserWithJsonAnswer(
-                "https://playground.learnqa.ru/api/user/",
+                "https://playground.learnqa.ru/api_dev/user/",
                 userData
         );
 
@@ -99,14 +99,14 @@ public class UserDeleteTest extends BaseTestCase {
         authData.put("password", userData.get("password"));
 
         Response responseGetAuth = apiCoreRequests.makePostRequest(
-                "https://playground.learnqa.ru/api/user/login",
+                "https://playground.learnqa.ru/api_dev/user/login",
                 authData);
         String cookie = responseGetAuth.getCookie("auth_sid");
         String token = responseGetAuth.getHeader("x-csrf-token");
 
         //Удаление пользователя
         Response deleteUser = apiCoreRequests.makeDeleteRequest(
-                "https://playground.learnqa.ru/api/user/" + userId + "1",
+                "https://playground.learnqa.ru/api_dev/user/" + userId + "1",
                 token,
                 cookie);
         Assertions.assertResponseTextContains(deleteUser, "This user can only delete their own account.");

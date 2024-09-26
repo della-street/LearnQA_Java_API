@@ -25,7 +25,7 @@ public class UserEditTest extends BaseTestCase {
         JsonPath resposeCreateAuth = RestAssured
                 .given()
                 .body(userData)
-                .post("https://playground.learnqa.ru/api/user/")
+                .post("https://playground.learnqa.ru/api_dev/user/")
                 .jsonPath();
 
         String userId = resposeCreateAuth.getString("id");
@@ -38,7 +38,7 @@ public class UserEditTest extends BaseTestCase {
         Response responseGetAuth = RestAssured
                 .given()
                 .body(authData)
-                .post("https://playground.learnqa.ru/api/user/login")
+                .post("https://playground.learnqa.ru/api_dev/user/login")
                 .andReturn();
 
         //EDIT USER
@@ -51,7 +51,7 @@ public class UserEditTest extends BaseTestCase {
                 .header("x-csrf-token", this.getHeader(responseGetAuth, "x-csrf-token"))
                 .cookie("auth_sid", this.getCookie(responseGetAuth, "auth_sid"))
                 .body(editData)
-                .put("https://playground.learnqa.ru/api/user/" + userId)
+                .put("https://playground.learnqa.ru/api_dev/user/" + userId)
                 .andReturn();
 
         //GET
@@ -59,7 +59,7 @@ public class UserEditTest extends BaseTestCase {
                 .given()
                 .header("x-csrf-token", this.getHeader(responseGetAuth, "x-csrf-token"))
                 .cookie("auth_sid", this.getCookie(responseGetAuth, "auth_sid"))
-                .get("https://playground.learnqa.ru/api/user/" + userId)
+                .get("https://playground.learnqa.ru/api_dev/user/" + userId)
                 .andReturn();
 
         Assertions.assertJsonByName(responseUserData, "firstName", newName);
@@ -73,7 +73,7 @@ public class UserEditTest extends BaseTestCase {
         editData.put("firstName", newName);
 
         Response editDataWithoutAuthorization = apiCoreRequests.makePutRequest(
-                "https://playground.learnqa.ru/api/user/3",
+                "https://playground.learnqa.ru/api_dev/user/3",
                 "x-csrf-token",
                 "auth_sid",
                 editData
@@ -86,7 +86,7 @@ public class UserEditTest extends BaseTestCase {
     public void testEditAnotherUserData() {
         //Создание пользователя
         Response createUser = apiCoreRequests.makePostRequestToCreateUser(
-                "https://playground.learnqa.ru/api/user/",
+                "https://playground.learnqa.ru/api_dev/user/",
                 DataGenerator.getRegistrationData()
         );
 
@@ -99,7 +99,7 @@ public class UserEditTest extends BaseTestCase {
         editData.put("firstName", newName);
 
         Response editAnotherUserData = apiCoreRequests.makePutRequest(
-                "https://playground.learnqa.ru/api/user/3",
+                "https://playground.learnqa.ru/api_dev/user/3",
                 firstUserToken,
                 firstUserCookie,
                 editData
@@ -114,7 +114,7 @@ public class UserEditTest extends BaseTestCase {
         //Создание пользователя
         Map<String, String> userData = DataGenerator.getRegistrationData();
         JsonPath createUser = apiCoreRequests.makePostRequestToCreateUserWithJsonAnswer(
-                "https://playground.learnqa.ru/api/user/",
+                "https://playground.learnqa.ru/api_dev/user/",
                 userData
         );
 
@@ -126,7 +126,7 @@ public class UserEditTest extends BaseTestCase {
         authData.put("password", userData.get("password"));
 
         Response responseGetAuth = apiCoreRequests.makePostRequest(
-                "https://playground.learnqa.ru/api/user/login",
+                "https://playground.learnqa.ru/api_dev/user/login",
                 authData);
         String cookie = responseGetAuth.getCookie("auth_sid");
         String token = responseGetAuth.getHeader("x-csrf-token");
@@ -137,7 +137,7 @@ public class UserEditTest extends BaseTestCase {
         editData.put("email", newEmail);
 
         Response editAnotherUserData = apiCoreRequests.makePutRequest(
-                "https://playground.learnqa.ru/api/user/" + userId,
+                "https://playground.learnqa.ru/api_dev/user/" + userId,
                 token,
                 cookie,
                 editData
@@ -152,7 +152,7 @@ public class UserEditTest extends BaseTestCase {
         //Создание пользователя
         Map<String, String> userData = DataGenerator.getRegistrationData();
         JsonPath createUser = apiCoreRequests.makePostRequestToCreateUserWithJsonAnswer(
-                "https://playground.learnqa.ru/api/user/",
+                "https://playground.learnqa.ru/api_dev/user/",
                 userData
         );
 
@@ -164,7 +164,7 @@ public class UserEditTest extends BaseTestCase {
         authData.put("password", userData.get("password"));
 
         Response responseGetAuth = apiCoreRequests.makePostRequest(
-                "https://playground.learnqa.ru/api/user/login",
+                "https://playground.learnqa.ru/api_dev/user/login",
                 authData);
         String cookie = responseGetAuth.getCookie("auth_sid");
         String token = responseGetAuth.getHeader("x-csrf-token");
@@ -175,7 +175,7 @@ public class UserEditTest extends BaseTestCase {
         editData.put("firstName", newFirstName);
 
         Response editAnotherUserData = apiCoreRequests.makePutRequest(
-                "https://playground.learnqa.ru/api/user/" + userId,
+                "https://playground.learnqa.ru/api_dev/user/" + userId,
                 token,
                 cookie,
                 editData

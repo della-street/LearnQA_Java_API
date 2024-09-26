@@ -34,7 +34,7 @@ public class UserRegisterTest extends BaseTestCase {
         Response responseCreateAuth = RestAssured
                 .given()
                 .body(userData)
-                .post("https://playground.learnqa.ru/api/user/")
+                .post("https://playground.learnqa.ru/api_dev/user/")
                 .andReturn();
 
         Assertions.assertResponseTextEquals(responseCreateAuth, "Users with email '" + email + "' already exists");
@@ -51,7 +51,7 @@ public class UserRegisterTest extends BaseTestCase {
         Response responseCreateAuth = RestAssured
                 .given()
                 .body(userData)
-                .post("https://playground.learnqa.ru/api/user/")
+                .post("https://playground.learnqa.ru/api_dev/user/")
                 .andReturn();
 
         Assertions.assertResponseCodeEquals(responseCreateAuth, 200);
@@ -69,7 +69,7 @@ public class UserRegisterTest extends BaseTestCase {
         registerData = DataGenerator.getRegistrationData(registerData);
 
         Response responseCreateUserWithWrongEmail = apiCoreRequests.
-                makePostRequestToCreateUser("https://playground.learnqa.ru/api/user/", registerData);
+                makePostRequestToCreateUser("https://playground.learnqa.ru/api_dev/user/", registerData);
 
         String expectedResult = "Invalid email format";
         Assertions.assertResponseTextEquals(responseCreateUserWithWrongEmail, expectedResult);
@@ -86,7 +86,7 @@ public class UserRegisterTest extends BaseTestCase {
         registerData = DataGenerator.getRegistrationData(registerData);
 
         Response responseCreateUserWithShortName = apiCoreRequests.
-                makePostRequestToCreateUser("https://playground.learnqa.ru/api/user/", registerData);
+                makePostRequestToCreateUser("https://playground.learnqa.ru/api_dev/user/", registerData);
 
         String expectedResult = "The value of 'firstName' field is too short";
 
@@ -112,7 +112,7 @@ public class UserRegisterTest extends BaseTestCase {
         registerData = DataGenerator.getRegistrationData(registerData);
 
         Response responseCreateUserWithLongName = apiCoreRequests.
-                makePostRequestToCreateUser("https://playground.learnqa.ru/api/user/", registerData);
+                makePostRequestToCreateUser("https://playground.learnqa.ru/api_dev/user/", registerData);
 
         String expectedResult = "The value of 'firstName' field is too long";
 
@@ -146,7 +146,7 @@ public class UserRegisterTest extends BaseTestCase {
     @MethodSource("getDataWithEmptyParameters")
     public void testCreateUserWithEmptyRegisterData(Map<String, String> registerData) {
         Response responseCreateUserWithEmptyRegisterParameters = apiCoreRequests.
-                makePostRequestToCreateUser("https://playground.learnqa.ru/api/user/", registerData);
+                makePostRequestToCreateUser("https://playground.learnqa.ru/api_dev/user/", registerData);
         System.out.println(responseCreateUserWithEmptyRegisterParameters.asString());
 
         String expectedAnswer = "The following required params are missed";
